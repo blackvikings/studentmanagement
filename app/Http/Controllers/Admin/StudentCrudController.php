@@ -40,7 +40,6 @@ class StudentCrudController extends CrudController
     protected function setupListOperation()
     {
 
-
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -58,8 +57,96 @@ class StudentCrudController extends CrudController
     {
         CRUD::setValidation(StudentRequest::class);
 
+        $this->crud->addField([
+            'name' => 'name',
+            'label' => 'Name',
+            'type' => 'text'
+        ]);
 
+        $this->crud->addField([
+            'name' => 'dateOfBirth',
+            'type' => 'date_picker',
+            'label' => 'Date of birth',
+            'date_picker_options' => [
+                'todayBtn' => 'linked',
+                'format'   => 'dd-mm-yyyy',
+                'language' => 'en'
+            ]
+        ]);
 
+        $this->crud->addField([
+            'name' => 'email',
+            'label' => 'E-mail address',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'mobileNumber',
+            'label' => 'Mobile Number',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addField([   // select_from_array
+            'name'        => 'gender',
+            'label'       => "Gender",
+            'type'        => 'select_from_array',
+            'options'     => ['male' => 'Male', 'female' => 'Female'],
+            'allows_null' => false,
+            'default'     => 'male',
+            // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
+        ]);
+
+        $this->crud->addField([
+            'name' => 'motherName',
+            'label' => 'Mother name',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'fatherName',
+            'label' => 'Father name',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'fatherName',
+            'label' => 'Father name',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'parentsMobileNumber',
+            'label' => 'Parents mobile number',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'address',
+            'label' => 'Address',
+            'type' => 'textarea'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'city',
+            'label' => 'City',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'pincode',
+            'label' => 'Pincode',
+            'type' => 'number'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'state',
+            'label' => 'State',
+            'type' => 'number'
+        ]);
+
+//        $this->crud->addField([
+//            ''
+//        ]);
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
