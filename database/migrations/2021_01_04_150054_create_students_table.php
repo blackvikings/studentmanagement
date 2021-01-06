@@ -30,7 +30,6 @@ class CreateStudentsTable extends Migration
             $table->string('state')->nullable();
             $table->string('hobbies')->nullable();
             $table->string('qualification')->nullable();
-            $table->enum('paymentStatus', ['not paid', 'paid', 'pending']);
             $table->timestamps();
         });
     }

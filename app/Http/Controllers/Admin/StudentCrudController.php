@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StudentRequest;
+use App\Models\Student;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\Models\StudentClass;
 
 /**
  * Class StudentCrudController
@@ -29,6 +31,8 @@ class StudentCrudController extends CrudController
         CRUD::setModel(\App\Models\Student::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/student');
         CRUD::setEntityNameStrings('student', 'students');
+
+        $this->crud->addButtonFromView('line', 'promote', 'promote', 'end');
     }
 
     /**
@@ -39,6 +43,44 @@ class StudentCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->addColumn([
+            'name' => 'name',
+            'label' => 'Name',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'dateOfBirth',
+            'type' => 'date_picker',
+            'label' => 'Date of birth',
+            'date_picker_options' => [
+                'todayBtn' => 'linked',
+                'format'   => 'dd-mm-yyyy',
+                'language' => 'en'
+            ]
+        ]);
+
+        $this->crud->addColumn([   // select_from_array
+            'name'        => 'gender',
+            'label'       => "Gender",
+            'type'        => 'select_from_array',
+            'options'     => ['male' => 'Male', 'female' => 'Female'],
+            'allows_null' => false,
+            'default'     => 'male',
+            // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'mobileNumber',
+            'label' => 'Mobile Number',
+            'type' => 'text'
+        ]);
+
+        $this->crud->addColumn([
+            'name' => 'address',
+            'label' => 'Address',
+            'type' => 'textarea'
+        ]);
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -141,12 +183,13 @@ class StudentCrudController extends CrudController
         $this->crud->addField([
             'name' => 'state',
             'label' => 'State',
-            'type' => 'number'
+            'type' => 'text'
         ]);
 
-//        $this->crud->addField([
-//            ''
-//        ]);
+        $this->crud->addField([
+            'type' => 'relationship',
+            'name' => 'studentClasses'
+        ]);
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
@@ -164,4 +207,18 @@ class StudentCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+    public function promote($id)
+    {
+        $student = Student::where('id', $id)->first();
+        $class = StudentClass::where('id','>' , $student->classId)->first();
+        if(empty($class))
+        {
+            return redirect()->back()->with('message', 'Student already promoted for next class');
+        }
+
+        Student::where('id', $id)->update(['classId' => $class->id]);
+        return redirect()->back()->with('message', 'Student promoted for next class');
+    }
+
 }
