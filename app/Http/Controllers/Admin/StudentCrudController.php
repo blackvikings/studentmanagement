@@ -221,6 +221,7 @@ class StudentCrudController extends CrudController
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public function generate($id)
     {
@@ -232,6 +233,8 @@ class StudentCrudController extends CrudController
         return view('card.card', compact('student'));
     }
 
+=======
+>>>>>>> parent of 162d8d1... some changes
 =======
 >>>>>>> parent of 162d8d1... some changes
 }
