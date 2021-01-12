@@ -33,7 +33,6 @@ class StudentCrudController extends CrudController
         CRUD::setEntityNameStrings('student', 'students');
 
         $this->crud->addButtonFromView('line', 'promote', 'promote', 'end');
-        $this->crud->addButtonFromView('line', 'generate', 'generate', 'end');
     }
 
     /**
@@ -222,14 +221,4 @@ class StudentCrudController extends CrudController
         return redirect()->back()->with('message', 'Student promoted for next class');
     }
 
-
-    public function generate($id)
-    {
-        $student = Student::where('id', $id)->first();
-
-        $studentId = $student->studentId + 1;
-        Student::where('id', $id)->update(['studentId' => $studentId]);
-
-        return view('card.card', compact('student'));
-    }
 }

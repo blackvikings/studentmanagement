@@ -16,7 +16,6 @@ Route::group([
 ], function () { // custom admin routes
     Route::crud('student', 'StudentCrudController');
     Route::get('student/{id}/promote', 'StudentCrudController@promote');
-    Route::get('student/{id}/generate', 'StudentCrudController@generate');
 
     Route::crud('student_class', 'Student_classCrudController');
     Route::crud('fee', 'FeeCrudController');
