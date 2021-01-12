@@ -33,6 +33,7 @@ class StudentCrudController extends CrudController
         CRUD::setEntityNameStrings('student', 'students');
 
         $this->crud->addButtonFromView('line', 'promote', 'promote', 'end');
+        $this->crud->addButtonFromView('line', 'generate', 'generate', 'end');
     }
 
     /**
@@ -128,14 +129,13 @@ class StudentCrudController extends CrudController
             'type' => 'text'
         ]);
 
-        $this->crud->addField([   // select_from_array
+        $this->crud->addField([ 
             'name'        => 'gender',
             'label'       => "Gender",
             'type'        => 'select_from_array',
             'options'     => ['male' => 'Male', 'female' => 'Female'],
             'allows_null' => false,
             'default'     => 'male',
-            // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
         ]);
 
         $this->crud->addField([
@@ -219,6 +219,17 @@ class StudentCrudController extends CrudController
 
         Student::where('id', $id)->update(['classId' => $class->id]);
         return redirect()->back()->with('message', 'Student promoted for next class');
+    }
+
+
+    public function generate($id)
+    {
+        $student = Student::where('id', $id)->first();
+
+        $studentId = (!empty($student->studentId) || $student->studentId != null || $student->studentId != '' ? $student->studentId+1 : 20000+1 );
+        Student::where('id', $id)->update(['studentId' => $studentId]);
+
+        return view('card.card', compact('student'));
     }
 
 }
