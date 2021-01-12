@@ -33,7 +33,6 @@ class StudentCrudController extends CrudController
         CRUD::setEntityNameStrings('student', 'students');
 
         $this->crud->addButtonFromView('line', 'promote', 'promote', 'end');
-        $this->crud->addButtonFromView('line', 'generate', 'generate', 'end');
     }
 
     /**
@@ -221,6 +220,7 @@ class StudentCrudController extends CrudController
         return redirect()->back()->with('message', 'Student promoted for next class');
     }
 
+<<<<<<< HEAD
 
     public function generate($id)
     {
@@ -232,4 +232,6 @@ class StudentCrudController extends CrudController
         return view('card.card', compact('student'));
     }
 
+=======
+>>>>>>> parent of 162d8d1... some changes
 }
