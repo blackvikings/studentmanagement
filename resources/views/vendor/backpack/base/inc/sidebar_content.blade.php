@@ -14,3 +14,5 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('student_class') }}'><i class='nav-icon la la-plug'></i>Classes</a></li>
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('fee') }}'><i class='nav-icon la la-question'></i> Fees</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('vocationaltraining') }}'><i class='nav-icon la la-question'></i> VocationalTrainings</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('course') }}'><i class='nav-icon la la-question'></i> Courses</a></li>

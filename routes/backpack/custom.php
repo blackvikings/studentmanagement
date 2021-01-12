@@ -22,4 +22,6 @@ Route::group([
     Route::crud('fee', 'FeeCrudController');
     Route::get('fee/{id}/payment', 'FeeCrudController@payment');
     Route::get('fee/{id}/invoice', 'FeeCrudController@invoice');
+    Route::crud('vocationaltraining', 'VocationalTrainingCrudController');
+    Route::crud('course', 'CourseCrudController');
 }); // this should be the absolute last line of this file
