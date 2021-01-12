@@ -227,7 +227,7 @@ class StudentCrudController extends CrudController
     {
         $student = Student::where('id', $id)->first();
 
-        $studentId = $student->studentId + 1;
+        $studentId = (!empty($student->studentId) || $student->studentId != null || $student->studentId != '' ? $student->studentId+1 : 20000+1 );
         Student::where('id', $id)->update(['studentId' => $studentId]);
 
         return view('card.card', compact('student'));
