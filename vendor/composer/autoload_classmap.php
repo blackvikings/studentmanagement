@@ -30,6 +30,7 @@ return array(
     'App\\Http\\Requests\\Student_classRequest' => $baseDir . '/app/Http/Requests/Student_classRequest.php',
     'App\\Http\\Requests\\VocationalTrainingRequest' => $baseDir . '/app/Http/Requests/VocationalTrainingRequest.php',
     'App\\Models\\Course' => $baseDir . '/app/Models/Course.php',
+    'App\\Models\\CourseVocationalTraining' => $baseDir . '/app/Models/CourseVocationalTraining.php',
     'App\\Models\\Fee' => $baseDir . '/app/Models/Fee.php',
     'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',
     'App\\Models\\StudentClass' => $baseDir . '/app/Models/StudentClass.php',

@@ -128,7 +128,7 @@ class StudentCrudController extends CrudController
             'type' => 'text'
         ]);
 
-        $this->crud->addField([ 
+        $this->crud->addField([
             'name'        => 'gender',
             'label'       => "Gender",
             'type'        => 'select_from_array',
@@ -220,10 +220,6 @@ class StudentCrudController extends CrudController
         return redirect()->back()->with('message', 'Student promoted for next class');
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
     public function generate($id)
     {
         $student = Student::where('id', $id)->first();
@@ -234,10 +230,4 @@ class StudentCrudController extends CrudController
         return view('card.card', compact('student'));
     }
 
-=======
->>>>>>> parent of 162d8d1... some changes
-=======
->>>>>>> parent of 162d8d1... some changes
-=======
->>>>>>> parent of 162d8d1... some changes
 }
