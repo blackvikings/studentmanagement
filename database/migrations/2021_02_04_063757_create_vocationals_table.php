@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class VocationalTraining extends Migration
+class CreateVocationalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,6 +28,8 @@ class VocationalTraining extends Migration
             $table->string('city')->nullable();
             $table->string('pincode')->nullable();
             $table->string('state')->nullable();
+            $table->bigInteger('course_id')->nullable()->unsigned();
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -39,6 +41,6 @@ class VocationalTraining extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('vocationals');
     }
 }

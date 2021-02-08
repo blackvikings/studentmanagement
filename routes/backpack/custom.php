@@ -23,4 +23,7 @@ Route::group([
     Route::get('fee/{id}/invoice', 'FeeCrudController@invoice');
     Route::crud('vocationaltraining', 'VocationalTrainingCrudController');
     Route::crud('course', 'CourseCrudController');
+    Route::crud('teacher', 'TeacherCrudController');
+    Route::crud('checkup', 'CheckupCrudController');
+    Route::crud('medical', 'MedicalCrudController');
 }); // this should be the absolute last line of this file

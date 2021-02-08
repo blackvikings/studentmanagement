@@ -36,7 +36,7 @@ class Course extends Model
     */
     public function training()
     {
-        return $this->belongsToMany(VocationalTraining::class, 'course_vocational', 'vocational_id');
+        return $this->hasMany(VocationalTraining::class, 'course_id');
     }
     /*
     |--------------------------------------------------------------------------

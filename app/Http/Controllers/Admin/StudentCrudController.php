@@ -82,6 +82,12 @@ class StudentCrudController extends CrudController
             'type' => 'textarea'
         ]);
 
+        $this->crud->addColumn([
+           'name' => 'timeShift',
+           'label' => 'Time Shift',
+           'type' => 'text',
+        ]);
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -183,6 +189,15 @@ class StudentCrudController extends CrudController
             'name' => 'state',
             'label' => 'State',
             'type' => 'text'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'timeShift',
+            'label' => 'Time Shift',
+            'type' => 'select_from_array',
+            'options'     => ['nursery-morning' => 'Nursery morning', 'day-school' => 'Day school'],
+            'allows_null' => false,
+            'default'     => 'day-school',
         ]);
 
         $this->crud->addField([

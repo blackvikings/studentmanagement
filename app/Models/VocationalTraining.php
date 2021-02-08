@@ -36,7 +36,7 @@ class VocationalTraining extends Model
     */
     public function course()
     {
-        return $this->belongsToMany(Course::class, 'course_vocational');
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
     /*

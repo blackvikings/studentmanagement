@@ -16,3 +16,6 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('fee') }}'><i class='nav-icon la la-question'></i> Fees</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('vocationaltraining') }}'><i class='nav-icon la la-question'></i> VocationalTrainings</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('course') }}'><i class='nav-icon la la-question'></i> Courses</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('teacher') }}'><i class='nav-icon la la-question'></i> Teachers</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('checkup') }}'><i class='nav-icon la la-question'></i> Checkups</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('medical') }}'><i class='nav-icon la la-question'></i> Medicals</a></li>
