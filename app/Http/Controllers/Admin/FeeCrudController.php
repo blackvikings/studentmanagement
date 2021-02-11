@@ -44,11 +44,11 @@ class FeeCrudController extends CrudController
     protected function setupListOperation()
     {
 
-        $this->crud->addColumn([
-            'name' => 'feeName',
-            'type' => 'text',
-            'label' => 'Fee Name'
-        ]);
+//        $this->crud->addColumn([
+//            'type' => 'relationship',
+//            'name' => 'category',
+//            'label' => 'Category'
+//        ]);
 
         $this->crud->addColumn([
             'name' => 'feeNumber',
@@ -100,32 +100,79 @@ class FeeCrudController extends CrudController
         CRUD::setValidation(FeeRequest::class);
 
         $this->crud->addField([
-            'name' => 'feeNumber',
-            'type' => 'number',
-            'label' => 'Installment Number'
-        ]);
-
-        $this->crud->addField([
-            'name' => 'amount',
-            'type' => 'text',
-            'label' => 'Fee Amount'
+            'name' => 'feeType',
+            'type' => 'select_from_array',
+            'options'     => ['Medical bill' => 'Medical bill', 'Morning school bill' => 'Morning school bill', 'Day school bill' => 'Day school bill', 'Hostel and day school bill' => 'Hostel and day school bill'],
+            'allows_null' => false,
+            'default'     => 'Medical bill',
+            'attributes' => [
+                'id' => 'feeType',
+            ]
         ]);
 
         $this->crud->addField([
             'name' => 'heading',
             'type' => 'select_from_array',
-            'options'     => ['PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH' => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH', 'PRANAB PATHA BHAVAN' => 'PRANAB PATHA BHAVAN'],
+            'options'     => ['PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH' => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH', 'PRANAB PATHA BHAVAN' => 'PRANAB PATHA BHAVAN', 'PRANAB PATHOLOGICAL LABORATORY' => 'PRANAB PATHOLOGICAL LABORATORY'],
             'allows_null' => false,
             'default'     => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH'
         ]);
 
         $this->crud->addField([
-            'name' => 'type',
-            'type' => 'select_from_array',
-            'options'     => ['male' => 'Male', 'female' => 'Female'],
-            'allows_null' => false,
-            'default'     => 'male',
+            'name' => 'feeName',
+            'type' => 'text',
+            'label' => 'Fee Name',
+            'attributes' => [
+                'class' => 'medical form-control'
+            ]
         ]);
+
+        $this->crud->addField([
+            'name' => 'peasant_name',
+            'type' => 'text',
+            'label' => 'Peasant name',
+            'attributes' => [
+                'class' => 'medical form-control'
+            ]
+        ]);
+
+        $this->crud->addField([
+            'name' => 'peasant_address',
+            'type' => 'textarea',
+            'label' => 'Peasant address',
+            'attributes' => [
+                'class' => 'medical form-control'
+            ]
+        ]);
+
+
+        $this->crud->addField([
+            'type' => 'relationship',
+            'name' => 'category',
+            'label' => 'Category',
+            'attributes' => [
+                'class' => 'school form-control'
+            ]
+        ]);
+
+        $this->crud->addField([
+            'name' => 'feeNumber',
+            'type' => 'number',
+            'label' => 'Installment Number',
+            'attributes' => [
+                'class' => 'school form-control'
+            ]
+        ]);
+
+        $this->crud->addField([
+            'name' => 'amount',
+            'type' => 'text',
+            'label' => 'Fee Amount',
+            'attributes' => [
+                'class' => 'medical form-control'
+            ]
+        ]);
+
 
         $this->crud->addField([   // select_from_array
             'name'        => 'paymentStatus',
@@ -139,7 +186,17 @@ class FeeCrudController extends CrudController
 
         $this->crud->addField([
             'type' => 'relationship',
-            'name' => 'students'
+            'name' => 'students',
+            'label' => 'Student',
+            'attributes' => [
+                'class' => 'school form-control'
+            ]
+        ]);
+
+        $this->crud->addField([
+            'name' => 'cast',
+            'type' => 'text',
+            'label' => 'Cast Name'
         ]);
 
 
@@ -165,13 +222,17 @@ class FeeCrudController extends CrudController
     {
         Fee::where('id', $id)->update(['paymentStatus' => 'paid', 'paymentDate' => date('Y-m-d')]);
 
-        $fee = Fee::where('id', $id)->first();
+        $fee = Fee::where('id', $id)->with(['category' => function($query){
+            $query->with('items');
+        }])->with('students')->first();
         return view('invoice.invoice', compact('fee'));
     }
 
     public function invoice($id)
     {
-        $fee = Fee::where('id', $id)->first();
+        $fee = Fee::where('id', $id)->with(['category' => function($query){
+            $query->with('items');
+        }])->with('students')->first();
         return view('invoice.invoice', compact('fee'));
     }
 

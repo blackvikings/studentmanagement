@@ -46,5 +46,10 @@ Route::group([
     Route::group(['middleware' => 'can:medicals'], function () {
         Route::crud('medical', 'MedicalCrudController');
     });
-    Route::crud('category', 'CategoryCrudController');
+    Route::group(['middleware' => 'can:categories'], function () {
+        Route::crud('category', 'CategoryCrudController');
+    });
+    Route::group(['middleware' => 'can:items'], function () {
+        Route::crud('item', 'ItemCrudController');
+    });
 }); // this should be the absolute last line of this file

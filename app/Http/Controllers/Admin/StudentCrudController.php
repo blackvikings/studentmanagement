@@ -115,6 +115,14 @@ class StudentCrudController extends CrudController
         ]);
 
         $this->crud->addField([
+            'name' => 'heading',
+            'type' => 'select_from_array',
+            'options'     => ['PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH' => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH', 'PRANAB PATHA BHAVAN' => 'PRANAB PATHA BHAVAN'],
+            'allows_null' => false,
+            'default'     => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH'
+        ]);
+
+        $this->crud->addField([
             'name' => 'dateOfBirth',
             'type' => 'date_picker',
             'label' => 'Date of birth',
@@ -206,6 +214,24 @@ class StudentCrudController extends CrudController
         $this->crud->addField([
             'type' => 'relationship',
             'name' => 'studentClasses'
+        ]);
+        $this->crud->addField([
+            'name' => 'addharNo',
+            'type' => 'text',
+            'label' => 'Adhar card No. (Optional)'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'image',
+            'type' => 'image',
+            'label' => 'Featured Image',
+        ]);
+
+
+        $this->crud->addField([
+           'name' => 'cast',
+           'type' => 'text',
+           'label' => 'Cast'
         ]);
         /**
          * Fields can be defined using the fluent syntax or array syntax:

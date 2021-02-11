@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\ItemRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class CategoryCrudController
+ * Class ItemCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class CategoryCrudController extends CrudController
+class ItemCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class CategoryCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Category::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
-        CRUD::setEntityNameStrings('category', 'categories');
+        CRUD::setModel(\App\Models\Item::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/item');
+        CRUD::setEntityNameStrings('item', 'items');
     }
 
     /**
@@ -40,18 +40,25 @@ class CategoryCrudController extends CrudController
     protected function setupListOperation()
     {
 //        CRUD::setFromDb(); // columns
+
         $this->crud->addColumn([
             'name' => 'name',
             'type' => 'text',
             'label' => 'Name'
         ]);
 
-
         $this->crud->addColumn([
             'type' => 'relationship',
-            'name' => 'parent',
+            'name' => 'category',
             'label' => 'Category'
         ]);
+
+        $this->crud->addColumn([
+            'name' => 'amount',
+            'type' => 'number',
+            'label' => 'Amount'
+        ]);
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -67,21 +74,26 @@ class CategoryCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(CategoryRequest::class);
+        CRUD::setValidation(ItemRequest::class);
 
 //        CRUD::setFromDb(); // fields
 
-
         $this->crud->addField([
-            'name' => 'name',
-            'type' => 'text',
-            'label' => 'Name'
+           'name' => 'name',
+           'type' => 'text',
+           'label' => 'Name'
         ]);
 
         $this->crud->addField([
-           'type' => 'relationship',
-           'name' => 'parent',
-           'label' => 'Category'
+            'type' => 'relationship',
+            'name' => 'category',
+            'label' => 'Category'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'amount',
+            'type' => 'number',
+            'label' => 'Amount'
         ]);
         /**
          * Fields can be defined using the fluent syntax or array syntax:

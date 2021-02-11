@@ -41,5 +41,9 @@
 @can('medicals')
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('medical') }}'><i class='nav-icon la la-question'></i> Medicals</a></li>
 @endcan
-
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
+@can('items')
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
+@endcan
+@can('categories')
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('item') }}'><i class='nav-icon la la-question'></i> Items</a></li>
+@endcan

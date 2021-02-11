@@ -15,14 +15,6 @@
             #print-btn, title {
                 visibility: hidden;
             }
-            /*#print-content, #print-content * {*/
-            /*    visibility: visible;*/
-            /*}*/
-            /*#print-content {*/
-            /*    position: absolute;*/
-            /*    left: 0;*/
-            /*    top: 0;*/
-            /*}*/
         }
     </style>
 </head>
@@ -32,11 +24,11 @@
 
     <form class="shadow p-4">
         <div id="print-content">
-            <h2 style="color: gray; text-align: center;">{{ $student->school->name }}</h2>
+            <h2 style="color: gray; text-align: center;">{{ $student->heading }}</h2>
             <hr>
             <div class="row">
                 <div class="col-md-4">
-                    <img src="{{ asset($student->image) }}" width="200" height="300" class="img-thumbnail" alt="...">
+                    <img src="{{ asset(str_replace("public", "",$student->image)) }}" width="200" height="300" class="img-thumbnail" alt="...">
                 </div>
                 <div class="col-md-8">
                     <p>{{ $student->name }}</p>
@@ -48,7 +40,7 @@
             </div>
             <div class="mb-2 pt-2">
                 <label>Name :-</label>
-                <strong><span style="color: red"> {{ $student->name }}</span></strong>
+                <strong><span style="color: red">{{ $student->name }}</span></strong>
             </div>
             <div class="mb-2">
                 <label>Address:-</label><strong><span style="color: red;"> {{ $student->address }}</span></strong>
@@ -63,7 +55,7 @@
                 <label>Parent's mobile:-</label><strong><span style="color: red">{{ $student->parentsMobileNumber }}</span></strong>
             </div>
         </div>
-        <input type="button" id="print-btn" value="Print this page" onClick="window.print()">
+        <button type="button" class="btn btn-primary" id="print-btn" onClick="window.print()">Print</button>
     </form>
 
 </div>
