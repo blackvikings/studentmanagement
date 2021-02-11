@@ -79,6 +79,8 @@ class FeeCrudController extends CrudController
             'name' => 'paymentStatus',
             'label' => 'Payment status'
         ]);
+
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -94,13 +96,8 @@ class FeeCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(FeeRequest::class);
 
-        $this->crud->addField([
-            'name' => 'feeName',
-            'type' => 'text',
-            'label' => 'Name'
-        ]);
+        CRUD::setValidation(FeeRequest::class);
 
         $this->crud->addField([
             'name' => 'feeNumber',
@@ -112,6 +109,22 @@ class FeeCrudController extends CrudController
             'name' => 'amount',
             'type' => 'text',
             'label' => 'Fee Amount'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'heading',
+            'type' => 'select_from_array',
+            'options'     => ['PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH' => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH', 'PRANAB PATHA BHAVAN' => 'PRANAB PATHA BHAVAN'],
+            'allows_null' => false,
+            'default'     => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH'
+        ]);
+
+        $this->crud->addField([
+            'name' => 'type',
+            'type' => 'select_from_array',
+            'options'     => ['male' => 'Male', 'female' => 'Female'],
+            'allows_null' => false,
+            'default'     => 'male',
         ]);
 
         $this->crud->addField([   // select_from_array
@@ -128,6 +141,7 @@ class FeeCrudController extends CrudController
             'type' => 'relationship',
             'name' => 'students'
         ]);
+
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -161,4 +175,8 @@ class FeeCrudController extends CrudController
         return view('invoice.invoice', compact('fee'));
     }
 
+    public function openGoogle($crud = false)
+    {
+        return '<a class="btn btn-xs btn-default" target="_blank" href="http://google.com?q='.urlencode($this->text).'" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i> Google it</a>';
+    }
 }

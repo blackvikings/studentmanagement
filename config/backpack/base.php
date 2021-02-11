@@ -71,7 +71,7 @@ return [
     // ------
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo'   => '<b>Back</b>pack',
+    'project_logo'   => '<img src="public/assets/220px-BSS_logo-removebg-preview.png"/>',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
@@ -221,7 +221,8 @@ return [
     'middleware_class' => [
         App\Http\Middleware\CheckIfAdmin::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        // \Backpack\CRUD\app\Http\Middleware\UseBackpackAuthGuardInsteadOfDefaultAuthGuard::class,
+         \Backpack\CRUD\app\Http\Middleware\UseBackpackAuthGuardInsteadOfDefaultAuthGuard::class,
+//        \App\Http\Middleware\AdminMiddleware::class,
     ],
 
     // Alias for that middleware
@@ -236,7 +237,7 @@ return [
 
     // The guard that protects the Backpack admin panel.
     // If null, the config.auth.defaults.guard value will be used.
-    'guard' => null,
+    'guard' => 'web',
 
     // The password reset configuration for Backpack.
     // If null, the config.auth.defaults.passwords value will be used.
@@ -292,5 +293,5 @@ return [
     |
     */
 
-    'license_code' => env('BACKPACK_LICENSE', false),
+    'license_code' => env('BACKPACK_LICENSE', true),
 ];

@@ -14,16 +14,37 @@ Route::group([
     ),
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
-    Route::crud('student', 'StudentCrudController');
-    Route::get('student/{id}/promote', 'StudentCrudController@promote');
+    Route::group(['middleware' => 'can:create student'], function (){
+        Route::crud('student', 'StudentCrudController');
+        Route::get('student/{id}/generate', 'StudentCrudController@generate');
+        Route::get('student/{id}/promote', 'StudentCrudController@promote');
+    });
 
-    Route::crud('student_class', 'Student_classCrudController');
-    Route::crud('fee', 'FeeCrudController');
-    Route::get('fee/{id}/payment', 'FeeCrudController@payment');
-    Route::get('fee/{id}/invoice', 'FeeCrudController@invoice');
-    Route::crud('vocationaltraining', 'VocationalTrainingCrudController');
-    Route::crud('course', 'CourseCrudController');
-    Route::crud('teacher', 'TeacherCrudController');
-    Route::crud('checkup', 'CheckupCrudController');
-    Route::crud('medical', 'MedicalCrudController');
+    Route::group(['middleware' => 'can:student_class'], function (){
+        Route::crud('student_class', 'Student_classCrudController');
+    });
+    Route::group(['middleware' => 'can:fees'], function (){
+        Route::crud('fee', 'FeeCrudController');
+        Route::get('fee/{id}/payment', 'FeeCrudController@payment');
+        Route::get('fee/{id}/invoice', 'FeeCrudController@invoice');
+    });
+    Route::group(['middleware' => 'can:vocationaltraining'], function (){
+        Route::crud('vocationaltraining', 'VocationalTrainingCrudController');
+    });
+
+    Route::group(['middleware' => 'can:courses'], function (){
+        Route::crud('course', 'CourseCrudController');
+    });
+    Route::group(['middleware' => 'can:teachers'], function (){
+        Route::crud('teacher', 'TeacherCrudController');
+    });
+
+    Route::group(['middleware' => 'can:checkups'], function (){
+        Route::crud('checkup', 'CheckupCrudController');
+    });
+
+    Route::group(['middleware' => 'can:medicals'], function () {
+        Route::crud('medical', 'MedicalCrudController');
+    });
+    Route::crud('category', 'CategoryCrudController');
 }); // this should be the absolute last line of this file

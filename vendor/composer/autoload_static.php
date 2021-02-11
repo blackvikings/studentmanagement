@@ -602,6 +602,7 @@ class ComposerStaticInitbaf47ef9e85f22f57516808ee9efcfa4
         'App\\Http\\Controllers\\Admin\\VocationalTrainingCrudController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/VocationalTrainingCrudController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckIfAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckIfAdmin.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',

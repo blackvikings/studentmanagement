@@ -18,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\VocationalTrainingCrudController' => $baseDir . '/app/Http/Controllers/Admin/VocationalTrainingCrudController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
+    'App\\Http\\Middleware\\AdminMiddleware' => $baseDir . '/app/Http/Middleware/AdminMiddleware.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckIfAdmin' => $baseDir . '/app/Http/Middleware/CheckIfAdmin.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
