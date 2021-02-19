@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\MedicalRequest;
+use App\Models\Fee;
+use App\Models\Invoice;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -29,6 +31,8 @@ class MedicalCrudController extends CrudController
         CRUD::setModel(\App\Models\Medical::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/medical');
         CRUD::setEntityNameStrings('medical', 'medicals');
+
+
     }
 
     /**
@@ -72,6 +76,22 @@ class MedicalCrudController extends CrudController
             'type' => 'datetime'
         ]);
 
+        $this->crud->addField([   // select_from_array
+            'name'        => 'gender',
+            'label'       => "Gender",
+            'type'        => 'select_from_array',
+            'options'     => ['male' => 'Male', 'female' => 'Female'],
+            'allows_null' => false,
+            'default'     => 'male',
+            // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
+        ]);
+
+        $this->crud->addField([
+            'name' => 'age',
+            'label' => 'Age',
+            'type' => 'number'
+        ]);
+
         $this->crud->addField([
             'name' => 'address',
             'label' => 'Address',
@@ -96,6 +116,21 @@ class MedicalCrudController extends CrudController
             'type' => 'relationship',
         ]);
 
+        $this->crud->addField([
+            'name' => 'cast',
+            'label' => 'Cast',
+            'type' => 'select_from_array',
+            'options'     => ['General' => 'General', 'ST' => 'ST', 'SC' => 'SC', 'OBC' => 'OBC', 'Other' => 'Other'],
+            'allows_null' => false,
+            'default'     => 'General',
+        ]);
+
+        $this->crud->addField([
+            'name' => 'discount',
+            'label' => 'Discount',
+            'type' => 'number'
+        ]);
+
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
@@ -113,4 +148,6 @@ class MedicalCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+
 }

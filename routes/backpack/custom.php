@@ -52,4 +52,5 @@ Route::group([
     Route::group(['middleware' => 'can:items'], function () {
         Route::crud('item', 'ItemCrudController');
     });
+    Route::crud('invoice', 'InvoiceCrudController');
 }); // this should be the absolute last line of this file

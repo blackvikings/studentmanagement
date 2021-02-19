@@ -102,7 +102,7 @@ class FeeCrudController extends CrudController
         $this->crud->addField([
             'name' => 'feeType',
             'type' => 'select_from_array',
-            'options'     => ['Medical bill' => 'Medical bill', 'Morning school bill' => 'Morning school bill', 'Day school bill' => 'Day school bill', 'Hostel and day school bill' => 'Hostel and day school bill'],
+            'options'     => ['Morning school bill' => 'Morning school bill', 'Day school bill' => 'Day school bill', 'Hostel and day school bill' => 'Hostel and day school bill'],
             'allows_null' => false,
             'default'     => 'Medical bill',
             'attributes' => [
@@ -113,36 +113,9 @@ class FeeCrudController extends CrudController
         $this->crud->addField([
             'name' => 'heading',
             'type' => 'select_from_array',
-            'options'     => ['PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH' => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH', 'PRANAB PATHA BHAVAN' => 'PRANAB PATHA BHAVAN', 'PRANAB PATHOLOGICAL LABORATORY' => 'PRANAB PATHOLOGICAL LABORATORY'],
+            'options'     => ['PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH' => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH', 'PRANAB PATHA BHAVAN' => 'PRANAB PATHA BHAVAN'],
             'allows_null' => false,
             'default'     => 'PRANAB CHHATRABAS & SWAMI PRANABANANDA SATABARSIKI VIDYAPITH'
-        ]);
-
-        $this->crud->addField([
-            'name' => 'feeName',
-            'type' => 'text',
-            'label' => 'Fee Name',
-            'attributes' => [
-                'class' => 'medical form-control'
-            ]
-        ]);
-
-        $this->crud->addField([
-            'name' => 'peasant_name',
-            'type' => 'text',
-            'label' => 'Peasant name',
-            'attributes' => [
-                'class' => 'medical form-control'
-            ]
-        ]);
-
-        $this->crud->addField([
-            'name' => 'peasant_address',
-            'type' => 'textarea',
-            'label' => 'Peasant address',
-            'attributes' => [
-                'class' => 'medical form-control'
-            ]
         ]);
 
 
@@ -156,15 +129,6 @@ class FeeCrudController extends CrudController
         ]);
 
         $this->crud->addField([
-            'name' => 'feeNumber',
-            'type' => 'number',
-            'label' => 'Installment Number',
-            'attributes' => [
-                'class' => 'school form-control'
-            ]
-        ]);
-
-        $this->crud->addField([
             'name' => 'amount',
             'type' => 'text',
             'label' => 'Fee Amount',
@@ -172,7 +136,6 @@ class FeeCrudController extends CrudController
                 'class' => 'medical form-control'
             ]
         ]);
-
 
         $this->crud->addField([   // select_from_array
             'name'        => 'paymentStatus',

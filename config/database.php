@@ -63,6 +63,16 @@ return [
             ]) : [],
         ],
 
+
+        'my-live-db' => [
+            'driver' => 'mysql',
+            'host' => env('DB_LIVE_HOST', '127.0.0.1'),
+            'port' => env('DB_LIVE_PORT', '3306'),
+            'database' => env('DB_LIVE_DATABASE', 'forge'),
+            'username' => env('DB_LIVE_USERNAME', 'forge'),
+            'password' => env('DB_LIVE_PASSWORD', ''),
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

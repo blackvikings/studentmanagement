@@ -4,7 +4,8 @@
             {{ trans('backpack::base.handcrafted_by') }} <a target="_blank" rel="noopener" href="{{ config('backpack.base.developer_link') }}">{{ config('backpack.base.developer_name') }}</a>.
         @endif
         @if (config('backpack.base.show_powered_by'))
-            {{ trans('backpack::base.powered_by') }} <a target="_blank" rel="noopener" href="http://backpackforlaravel.com?ref=panel_footer_link">Backpack for Laravel</a>.
+            {{ trans('backpack::base.powered_by') }} <a target="_blank" rel="noopener" href="https://www.sdtechsolution.co.in/">Sdtech Solution</a>.
         @endif
     </div>
 @endif
+

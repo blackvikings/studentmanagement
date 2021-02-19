@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+//        MWI\LaravelDBSync\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...

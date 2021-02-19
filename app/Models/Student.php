@@ -28,7 +28,8 @@ class Student extends Model
                             'image',
                             'cast',
                             'heading',
-                            'addharNo'];
+                            'addharNo',
+                            'timeShift'];
 
 
     public function studentClasses()

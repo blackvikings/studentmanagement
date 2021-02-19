@@ -33,7 +33,43 @@ class StudentCrudController extends CrudController
         CRUD::setRoute(config('backpack.base.route_prefix') . '/student');
         CRUD::setEntityNameStrings('student', 'students');
 
-        $this->crud->removeButton('add student');
+        $this->crud->addFilter([
+            'name' => 'classId',
+            'type' => 'select2',
+            'label' => 'Class'
+        ], function () {
+            return StudentClass::all()->pluck('name', 'id')->toArray();
+        }, function ($value){
+            $this->crud->addClause('where', 'classId', $value);
+        });
+
+        $this->crud->addFilter([
+            'name'  => 'timeShift',
+            'type'  => 'select2',
+            'label' => 'Time shift'
+        ], function () {
+            return [
+                'nursery-morning' => 'Nursery morning',
+                'day-school' => 'Day school',
+            ];
+        }, function ($value) { // if the filter is active
+             $this->crud->addClause('where', 'timeShift', $value);
+        });
+
+
+        $this->crud->addFilter([
+            'type'  => 'date_range',
+            'name'  => 'from_to',
+            'label' => 'Date range'
+        ],
+            false,
+            function ($value) { // if the filter is active, apply these constraints
+                 $dates = json_decode($value);
+                 $this->crud->addClause('where', 'updated_at', '>=', $dates->from);
+                 $this->crud->addClause('where', 'updated_at', '<=', $dates->to . ' 23:59:59');
+            });
+
+        $this->crud->enableExportButtons();
         $this->crud->addButtonFromView('line', 'generate', 'generate', 'end');
         $this->crud->addButtonFromView('line', 'promote', 'promote', 'end');
     }
@@ -167,12 +203,6 @@ class StudentCrudController extends CrudController
         ]);
 
         $this->crud->addField([
-            'name' => 'fatherName',
-            'label' => 'Father name',
-            'type' => 'text'
-        ]);
-
-        $this->crud->addField([
             'name' => 'parentsMobileNumber',
             'label' => 'Parents mobile number',
             'type' => 'text'
@@ -215,6 +245,7 @@ class StudentCrudController extends CrudController
             'type' => 'relationship',
             'name' => 'studentClasses'
         ]);
+
         $this->crud->addField([
             'name' => 'addharNo',
             'type' => 'text',
@@ -229,10 +260,16 @@ class StudentCrudController extends CrudController
 
 
         $this->crud->addField([
-           'name' => 'cast',
-           'type' => 'text',
-           'label' => 'Cast'
+            'name' => 'cast',
+            'label' => 'Cast',
+            'type' => 'select_from_array',
+            'options'     => ['General' => 'General', 'ST' => 'ST', 'SC' => 'SC', 'OBC' => 'OBC', 'Other' => 'Other'],
+            'allows_null' => false,
+            'default'     => 'General',
         ]);
+
+
+
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');

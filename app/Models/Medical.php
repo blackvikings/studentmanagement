@@ -39,6 +39,10 @@ class Medical extends Model
     {
         return $this->belongsTo(Checkup::class, 'checkup_id');
     }
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class, 'medical_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
